@@ -1,0 +1,40 @@
+
+<div class="game-page">
+
+  <h1 class="title">Simon game</h1>
+
+  <div class="gameboard">
+    <div class="button button_blue" [class.active-button]="activeButton === 1" (click)="chooseUserButton(1)">1</div>
+    <div class="button button_red" [class.active-button]="activeButton === 2" (click)="chooseUserButton(2)">2</div>
+    <div class="button button_green" [class.active-button]="activeButton === 3" (click)="chooseUserButton(3)">3</div>
+    <div class="button button_yellow" [class.active-button]="activeButton === 4" (click)="chooseUserButton(4)">4</div>
+  </div>
+  <div class="sidebar">
+    <h3>Лучший счет:</h3>
+    <h2>Раунд:{{round}}</h2>
+    <div class="loose" *ngIf="looseMessage">{{looseMessage}}</div>
+    <button class="button-start"
+            (click)="playGame()"
+            [disabled]="round > 0">
+      Старт</button>
+    <button (click)="test()">TEST</button>
+    <div class="sustainability">
+      <h3>Сложность:</h3>
+      <li>
+        <input type="radio" id="light" name="sustainability"
+               value="light">
+        <label for="light">Легкая</label>
+      </li>
+      <li>
+        <input type="radio" id="medium" name="sustainability"
+               value="medium">
+        <label for="medium">Средняя</label>
+      </li>
+      <li>
+        <input type="radio" id="hard" name="sustainability"
+               value="hard">
+        <label for="hard">Тяжелая</label>
+      </li>
+    </div>
+  </div>
+</div>
