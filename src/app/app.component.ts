@@ -13,7 +13,7 @@ export class AppComponent {
   looseMessage: string
   amountColor: number = 0
   i: number = 0
-
+  timeOut: number = 1500
   clearActiveButton = () => {
     this.activeButton = 0
   }
@@ -34,7 +34,7 @@ export class AppComponent {
         clearInterval(timeoutChooseColor)
         this.i = 0
       }
-    }, 600)
+    }, this.timeOut)
 
 
   }
@@ -75,6 +75,10 @@ export class AppComponent {
   }
 
   test() {
-    console.log(this.userArr)
+  }
+
+  changeComplexity(timeOut: number) {
+    this.timeOut = timeOut
+    console.log(this.timeOut)
   }
 }

@@ -20,7 +20,6 @@
   max-width: 650px;
   width: 100%;
   height: auto;
-  //margin-right: auto;
   margin-left: auto;
 
 
@@ -36,7 +35,7 @@
   margin: 2px;
   transition: all 0.20s;
   &:hover {
-    opacity: .7;
+    opacity: .8;
     transform: scale(1.01);
   }
   &:active{
@@ -101,16 +100,24 @@
     cursor: not-allowed;
     opacity: .1;
   }
-}
-
-.button-start:hover {
-  transform: scale(1.03);
-  opacity: 1;
-  &:disabled {
-    cursor: not-allowed;
-    opacity: .1;
+  &:hover {
+    transform: scale(1.03);
+    opacity: 1;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .1;
+    }
   }
 }
+
+//.button-start:hover {
+//  transform: scale(1.03);
+//  opacity: 1;
+//  &:disabled {
+//    cursor: not-allowed;
+//    opacity: .1;
+//  }
+//}
 
 .sustainability {
   margin: 0;
@@ -123,4 +130,7 @@ li {
 }
 .loose{
   color: red;
+}
+.disabled{
+  pointer-events: none;
 }
