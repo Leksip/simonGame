@@ -8,12 +8,16 @@ import {Component} from '@angular/core';
 export class AppComponent {
   controlArr = [];
   userArr = []
+
   activeButton: number;
   round: number = 0;
   looseMessage: string
   amountColor: number = 0
   i: number = 0
   timeOut: number = 1500
+  score: string = localStorage.getItem('score')
+  currentButton: number = 0
+
   clearActiveButton = () => {
     this.activeButton = 0
   }
@@ -27,16 +31,11 @@ export class AppComponent {
       this.activeButton = Math.floor(Math.random() * 4) + 1
       setTimeout(this.clearActiveButton, 500)
       this.controlArr.push(this.activeButton)
-      console.log(this.i)
-      console.log(amountColor)
-      console.log(`control ${this.controlArr}`)
       if (this.i > amountColor) {
         clearInterval(timeoutChooseColor)
         this.i = 0
       }
     }, this.timeOut)
-
-
   }
 
   playGame() {
@@ -45,40 +44,55 @@ export class AppComponent {
     this.activeButton = Math.floor(Math.random() * 4) + 1
     this.controlArr.push(this.activeButton)
     setTimeout(this.clearActiveButton, 1000)
-
   }
 
   nextRound() {
     this.round++
     this.amountColor++
+    this.currentButton = 0;
     this.chooseRandomColor(this.amountColor);
-    console.log(`control ${this.controlArr}`)
+    localStorage.setItem('score', this.round.toString())
+    console.log(this.currentButton)
+
+  }
+
+  endGame() {
+    if (localStorage.getItem('score')) {
+      if (this.round > +localStorage.getItem('score')) {
+        localStorage.removeItem('score')
+        localStorage.setItem('score', this.round.toString())
+      }
+    } else {
+      localStorage.setItem('score', this.round.toString())
+    }
+    this.score = localStorage.getItem('score')
+    this.userArr = []
+    this.controlArr = []
+    this.amountColor = 0
+    this.i = 0
+    this.looseMessage = `Вы проиграли в ${this.round} раунде, попробуйте еще раз!`
+    this.round = 0
+    this.currentButton = 0;
   }
 
   chooseUserButton(color: number) {
     this.userArr.push(color)
-    console.log(`user ${this.userArr}`)
-    console.log(`control ${this.controlArr}`)
-    console.log(`Round ${this.round}`)
-    if (this.userArr.length >= this.controlArr.length) {
+    if (this.userArr[this.currentButton] === this.controlArr[this.currentButton]) {
+      this.currentButton++
       if (this.userArr.toString() === this.controlArr.toString()) {
         this.nextRound()
-      } else {
-        this.userArr = []
-        this.controlArr = []
-        this.amountColor = 0
-        this.i = 0
-        this.looseMessage = `Вы проиграли в ${this.round} раунде, попробуйте еще раз!`
-        this.round = 0
       }
+    } else {
+      this.endGame()
+      this.currentButton = 0;
     }
   }
 
   test() {
+    console.log(this.score)
   }
 
   changeComplexity(timeOut: number) {
     this.timeOut = timeOut
-    console.log(this.timeOut)
   }
 }

@@ -1,23 +1,26 @@
-
 <div class="game-page">
 
-  <h1 class="title">Simon game</h1>
+  <h1 class="title">Simon The Game</h1>
 
-  <div class="gameboard">
-    <div class="button button_blue" [class.active-button]="activeButton === 1" [class.disabled]="round === 0" (click)="chooseUserButton(1)"></div>
-    <div class="button button_red" [class.active-button]="activeButton === 2" [class.disabled]="round === 0" (click)="chooseUserButton(2)"></div>
-    <div class="button button_green" [class.active-button]="activeButton === 3" [class.disabled]="round === 0" (click)="chooseUserButton(3)"></div>
-    <div class="button button_yellow" [class.active-button]="activeButton === 4" [class.disabled]="round === 0" (click)="chooseUserButton(4)"></div>
+  <div class="gameBoard" [class.disabled]="round === 0">
+    <div class="button button_blue" [class.active-button]="activeButton === 1"
+         (click)="chooseUserButton(1)"></div>
+    <div class="button button_red" [class.active-button]="activeButton === 2"
+         (click)="chooseUserButton(2)"></div>
+    <div class="button button_green" [class.active-button]="activeButton === 3"
+         (click)="chooseUserButton(3)"></div>
+    <div class="button button_yellow" [class.active-button]="activeButton === 4"
+         (click)="chooseUserButton(4)"></div>
   </div>
   <div class="sidebar">
-    <h3>Лучший счет:</h3>
+    <h3>Лучший счет:{{score}}</h3>
     <h2>Раунд:{{round}}</h2>
     <div class="loose" *ngIf="looseMessage">{{looseMessage}}</div>
     <button class="button-start"
             (click)="playGame()"
             [disabled]="round > 0">
-      Старт</button>
-    <button (click)="test()">TEST</button>
+      Старт
+    </button>
     <div class="sustainability">
       <h3>Сложность:</h3>
       <li>
