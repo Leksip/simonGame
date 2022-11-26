@@ -2,7 +2,7 @@
 
   <h1 class="title">Simon The Game</h1>
 
-  <div class="gameBoard" [class.disabled]="round === 0">
+  <div class="gameBoard" [class.disabled]="round === 0 || disabled">
     <div class="button button_blue" [class.active-button]="activeButton === 1"
          (click)="chooseUserButton(1)"></div>
     <div class="button button_red" [class.active-button]="activeButton === 2"
